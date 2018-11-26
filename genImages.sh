@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-aws ecr get-login --no-include-email
+$(aws ecr get-login --no-include-email)
 
 export BUILD_NUMBER=0.0.0
 
