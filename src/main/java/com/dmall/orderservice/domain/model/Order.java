@@ -1,11 +1,28 @@
 package com.dmall.orderservice.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Order {
-    private final String orderId;
+    private final String id;
     private final String productId;
+    private final int quantity;
+    private final BigDecimal totalPrice;
+    private final String address;
+    private final String phoneNumber;
+    private boolean isPaid;
+
+    public Order(String productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
+        id = UUID.randomUUID().toString();
+        this.productId = productId;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
 }

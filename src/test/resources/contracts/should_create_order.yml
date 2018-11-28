@@ -5,5 +5,11 @@ request:
     Content-Type: application/json
   body:
     productId: product-id-1
+    quantity: 10
+    totalPrice: 100
+    address: address
+    phoneNumber: 110
 response:
   status: 201
+  body:
+    productId: product-id-1
