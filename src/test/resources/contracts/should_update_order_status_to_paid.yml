@@ -1,0 +1,12 @@
+request:
+  method: PUT
+  url: /orders/8888
+  headers:
+    Content-Type: application/json
+  body:
+    productId: product-id-1
+    isPayed: true
+response:
+  status: 204
+  body:
+    productId: product-id-9

@@ -31,6 +31,12 @@ public class OrderController {
         return new Order(orderId, "product-id-1");
     }
 
+    @PutMapping("/{orderId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public Order updateOrder(@PathVariable String orderId) {
+        return new Order(orderId, "product-id-9");
+    }
+
     @Setter
     private static class CreateOrderRequest {
         private String productId;
