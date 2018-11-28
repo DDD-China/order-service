@@ -1,47 +1,48 @@
 buildscript {
+    ext {
+        springBootVersion = '2.0.6.RELEASE'
+    }
     repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
         mavenCentral()
     }
     dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.0.2.RELEASE"
+        classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
     }
-}
-
-plugins {
-    id "org.springframework.boot" version "2.0.6.RELEASE"
-    id "com.palantir.docker" version "0.13.0"
-    id "io.spring.dependency-management" version "1.0.6.RELEASE"
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.palantir.docker'
 apply plugin: 'spring-cloud-contract'
 
-group = '955065381857.dkr.ecr.cn-north-1.amazonaws.com.cn'
+group = 'com.dmall'
+version = '0.1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
-bootJar {
+jar {
     baseName = 'order-service'
-    version = '0.1.0'
+    version = "${version}"
 }
 
-task unpack(type: Copy) {
-    dependsOn bootJar
-    from(zipTree(tasks.bootJar.outputs.files.singleFile))
-    into("build/dependency")
-}
 docker {
-    name "${project.group}/${bootJar.baseName}"
-    copySpec.from(tasks.unpack.outputs).into("dependency")
-    buildArgs(['DEPENDENCY': "dependency"])
+    name "${project.group}/${jar.baseName}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
 }
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
 
 
 ext {
@@ -49,13 +50,10 @@ ext {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
-//    compile('org.springframework.boot:spring-boot-starter-security')
-//    compile('org.springframework.boot:spring-boot-starter-data-redis')
-//    compile('org.springframework.session:spring-session-data-redis')
-    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
     compileOnly('org.projectlombok:lombok')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
 }
 
