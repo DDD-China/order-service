@@ -1,7 +1,5 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-slim
 VOLUME /tmp
-ARG DEPENDENCY=target/dependency
-COPY ${DEPENDENCY}/BOOT-INF/lib /app/lib
-COPY ${DEPENDENCY}/BOOT-INF/classes /app
-COPY ${DEPENDENCY}/META-INF /app/META-INF
-ENTRYPOINT ["java","-cp","app:app/lib/*","com.dmall.orderservice.OrderServiceApplication"]
+ARG JAR_FILE
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
