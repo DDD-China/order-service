@@ -1,0 +1,9 @@
+request:
+  method: POST
+  url: /orders
+  headers:
+    Content-Type: application/json
+  body:
+    productId: product-id-1
+response:
+  status: 201
