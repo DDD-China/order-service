@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -24,7 +26,7 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Order createOrder(@RequestBody CreateOrderRequest request) {
+    public Order createOrder(@Valid @RequestBody CreateOrderRequest request) {
         return orderApplicationService.createOrder(request.productId, request.quantity, request.totalPrice, request.address, request.phoneNumber);
     }
 
@@ -45,10 +47,15 @@ public class OrderController {
 
     @Setter
     private static class CreateOrderRequest {
-        private long productId;
-        private int quantity;
+        @NotNull
+        private Long productId;
+        @NotNull
+        private Integer quantity;
+        @NotNull
         private BigDecimal totalPrice;
+        @NotNull
         private String address;
+        @NotNull
         private String phoneNumber;
     }
 }
