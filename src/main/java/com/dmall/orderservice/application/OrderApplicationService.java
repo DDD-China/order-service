@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 public class OrderApplicationService {
@@ -20,5 +21,9 @@ public class OrderApplicationService {
         final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber);
         orderRepository.save(order);
         return order;
+    }
+
+    public Optional<Order> getOrder(String orderId) {
+        return orderRepository.findById(orderId);
     }
 }

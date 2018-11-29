@@ -7,8 +7,10 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/orders")
@@ -28,7 +30,11 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public Order getOrderById(@PathVariable("orderId") String orderId) {
-        return new Order(orderId, 1, 1, new BigDecimal("1"), "address", "110", false);
+        final Optional<Order> order = orderApplicationService.getOrder(orderId);
+        if (order.isPresent()) {
+            return order.get();
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{orderId}")

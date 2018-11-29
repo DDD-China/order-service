@@ -7,6 +7,7 @@ import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
@@ -20,6 +21,8 @@ public class ContractVerifierBase {
                 .thenReturn(
                         new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false)
                 );
+        when(orderApplicationService.getOrder("8888"))
+                .thenReturn(Optional.of(new Order("8888", 1, 1, new BigDecimal("1"), "address", "110", false)));
         RestAssuredMockMvc.standaloneSetup(new OrderController(orderApplicationService));
     }
 }

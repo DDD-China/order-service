@@ -5,6 +5,8 @@ import com.dmall.orderservice.domain.model.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public class MysqlOrderRepository implements OrderRepository {
     private final OrderPersistence orderPersistence;
@@ -15,13 +17,14 @@ public class MysqlOrderRepository implements OrderRepository {
     }
 
     public Order save(Order order) {
-        final OrderEntity orderEntity = OrderEntity.builder()
-                .id(order.getId())
-                .productId(order.getProductId())
-                .totalPrice(order.getTotalPrice())
-                .build();
+        final OrderEntity orderEntity = new OrderEntity(order);
         orderPersistence.save(orderEntity);
         return order;
+    }
+
+    @Override
+    public Optional<Order> findById(String orderId) {
+        return orderPersistence.findById(orderId).map(OrderEntity::toOrder);
     }
 
 }

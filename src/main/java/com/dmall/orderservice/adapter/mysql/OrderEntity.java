@@ -1,7 +1,6 @@
 package com.dmall.orderservice.adapter.mysql;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import com.dmall.orderservice.domain.model.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,12 +10,20 @@ import java.math.BigDecimal;
 
 @Entity(name = "orders")
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 class OrderEntity {
     @Id
     private String id;
     private long productId;
     private BigDecimal totalPrice;
+
+    OrderEntity(Order order) {
+        this.id = order.getId();
+        this.productId = order.getProductId();
+        this.totalPrice = order.getTotalPrice();
+    }
+
+    Order toOrder() {
+        return new Order(id, productId, 0, totalPrice, "address", "phoneNumber", false);
+    }
 }
