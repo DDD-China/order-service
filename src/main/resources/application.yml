@@ -7,6 +7,10 @@ spring:
     url: jdbc:mysql://localhost/order_service_db
     username: root
     password: abcd1234
+management:
+  endpoints:
+    web:
+      base-path: /orders/actuator
 ---
 spring:
   profiles: prod

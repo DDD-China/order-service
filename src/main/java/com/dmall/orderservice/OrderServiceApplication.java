@@ -29,7 +29,9 @@ public class OrderServiceApplication {
     public static class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests().anyRequest().authenticated().and()
+            http.authorizeRequests()
+                    .antMatchers("/orders/actuator/info").permitAll()
+                    .anyRequest().authenticated().and()
                     .csrf().disable();
         }
     }
