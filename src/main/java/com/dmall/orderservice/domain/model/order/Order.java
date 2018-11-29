@@ -1,5 +1,6 @@
 package com.dmall.orderservice.domain.model.order;
 
+import com.dmall.orderservice.domain.exception.AlreadyPaidException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -29,6 +30,9 @@ public class Order {
     }
 
     public void paid() {
+        if (paid) {
+            throw new AlreadyPaidException(id);
+        }
         paid = true;
     }
 }

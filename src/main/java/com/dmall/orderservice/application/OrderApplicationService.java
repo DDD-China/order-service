@@ -2,7 +2,7 @@ package com.dmall.orderservice.application;
 
 import com.dmall.orderservice.domain.exception.NotFoundException;
 import com.dmall.orderservice.domain.model.inventorylock.InventoryLock;
-import com.dmall.orderservice.domain.model.inventorylock.InventoryLockRepository;
+import com.dmall.orderservice.domain.model.inventorylock.InventoryLockService;
 import com.dmall.orderservice.domain.model.order.Order;
 import com.dmall.orderservice.domain.model.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,16 +14,16 @@ import java.util.Optional;
 @Service
 public class OrderApplicationService {
     private final OrderRepository orderRepository;
-    private final InventoryLockRepository inventoryLockRepository;
+    private final InventoryLockService inventoryLockService;
 
     @Autowired
-    public OrderApplicationService(OrderRepository orderRepository, InventoryLockRepository InventoryLockRepository) {
+    public OrderApplicationService(OrderRepository orderRepository, InventoryLockService inventoryLockService) {
         this.orderRepository = orderRepository;
-        this.inventoryLockRepository = InventoryLockRepository;
+        this.inventoryLockService = inventoryLockService;
     }
 
     public Order createOrder(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
-        final String lockId = inventoryLockRepository.save(new InventoryLock(productId, quantity));
+        final String lockId = inventoryLockService.createLock(new InventoryLock(productId, quantity));
 
         final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber, lockId);
         orderRepository.save(order);
@@ -38,6 +38,8 @@ public class OrderApplicationService {
         final Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new NotFoundException(Order.class, orderId));
         order.paid();
+
+        inventoryLockService.finish(order.getLockId());
         orderRepository.save(order);
     }
 }
