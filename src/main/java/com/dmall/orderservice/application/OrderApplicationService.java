@@ -1,5 +1,6 @@
 package com.dmall.orderservice.application;
 
+import com.dmall.orderservice.domain.exception.NotFoundException;
 import com.dmall.orderservice.domain.model.Order;
 import com.dmall.orderservice.domain.model.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,12 @@ public class OrderApplicationService {
 
     public Optional<Order> getOrder(String orderId) {
         return orderRepository.findById(orderId);
+    }
+
+    public void paid(String orderId) {
+        final Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new NotFoundException(Order.class, orderId));
+        order.paid();
+        orderRepository.save(order);
     }
 }

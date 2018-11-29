@@ -26,5 +26,4 @@ public class MysqlOrderRepository implements OrderRepository {
     public Optional<Order> findById(String orderId) {
         return orderPersistence.findById(orderId).map(OrderEntity::toOrder);
     }
-
 }

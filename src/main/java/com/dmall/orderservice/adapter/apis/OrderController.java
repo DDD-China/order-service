@@ -33,16 +33,15 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public Order getOrderById(@PathVariable("orderId") String orderId) {
         final Optional<Order> order = orderApplicationService.getOrder(orderId);
-        if (order.isPresent()) {
-            return order.get();
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return order.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/{orderId}")
+    @PatchMapping("/{orderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public Order updateOrder(@PathVariable String orderId) {
-        return new Order(orderId, 1, 10, new BigDecimal("100"), "address", "110", true);
+    public void updateOrder(@PathVariable String orderId, @RequestBody UpdateOrderRequest requset) {
+        if (requset.paid != null && requset.paid) {
+            orderApplicationService.paid(orderId);
+        }
     }
 
     @Setter
@@ -57,5 +56,10 @@ public class OrderController {
         private String address;
         @NotNull
         private String phoneNumber;
+    }
+
+    @Setter
+    private static class UpdateOrderRequest {
+        private Boolean paid;
     }
 }

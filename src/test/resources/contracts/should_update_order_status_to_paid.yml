@@ -1,22 +1,9 @@
 request:
-  method: PUT
+  method: PATCH
   url: /orders/8888
   headers:
     Content-Type: application/json
   body:
-    productId: 1
-    quantity: 10
-    totalPrice: 100
-    address: address
-    phoneNumber: 110
     paid: true
 response:
   status: 204
-  body:
-    id: 8888
-    productId: 1
-    quantity: 10
-    totalPrice: 100
-    address: address
-    phoneNumber: 110
-    paid: true
