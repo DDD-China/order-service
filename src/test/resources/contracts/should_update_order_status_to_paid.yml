@@ -1,9 +1,0 @@
-request:
-  method: PATCH
-  url: /orders/8888
-  headers:
-    Content-Type: application/json
-  body:
-    paid: true
-response:
-  status: 204

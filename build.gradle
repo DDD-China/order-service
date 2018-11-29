@@ -69,6 +69,7 @@ dependencyManagement {
 
 contracts {
     packageWithBaseClasses = 'com.dmall.orderservice.contract.base'
+    contractsDslDir = project.file("api")
 }
 
 flyway {

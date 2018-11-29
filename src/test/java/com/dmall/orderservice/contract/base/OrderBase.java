@@ -13,7 +13,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ContractVerifierBase {
+public class OrderBase {
     @Before
     public void setup() {
         final OrderApplicationService orderApplicationService = mock(OrderApplicationService.class);
