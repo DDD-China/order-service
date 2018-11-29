@@ -10,14 +10,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class Order {
     private final String id;
-    private final String productId;
+    private final long productId;
     private final int quantity;
     private final BigDecimal totalPrice;
     private final String address;
     private final String phoneNumber;
     private boolean isPaid;
 
-    public Order(String productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
+    public Order(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
         id = UUID.randomUUID().toString();
         this.productId = productId;
         this.quantity = quantity;

@@ -6,6 +6,6 @@ request:
 response:
   status: 200
   body:
-    productId: "product-id-1"
+    productId: 1
   headers:
     Content-Type: application/json;charset=UTF-8

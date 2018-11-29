@@ -10,9 +10,13 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.0.2.RELEASE"
+        classpath("org.springframework.cloud:spring-cloud-contract-gradle-plugin:2.0.2.RELEASE")
         classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
     }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "5.0.7"
 }
 
 apply plugin: 'java'
@@ -50,13 +54,16 @@ ext {
 }
 
 dependencies {
-    implementation('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-security')
     compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.session:spring-session-data-redis')
-    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    compile('org.flywaydb:flyway-core')
+    compile('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.springframework.cloud:spring-cloud-starter-contract-verifier')
 }
 
@@ -68,4 +75,10 @@ dependencyManagement {
 
 contracts {
     packageWithBaseClasses = 'com.dmall.orderservice.contract.base'
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost/order_service_db'
+    user = 'root'
+    password = 'abcd1234'
 }

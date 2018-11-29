@@ -28,18 +28,18 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public Order getOrderById(@PathVariable("orderId") String orderId) {
-        return new Order(orderId, "product-id-1", 1, new BigDecimal("1"), "address", "110", false);
+        return new Order(orderId, 1, 1, new BigDecimal("1"), "address", "110", false);
     }
 
     @PutMapping("/{orderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Order updateOrder(@PathVariable String orderId) {
-        return new Order(orderId, "product-id-9", 1, new BigDecimal("1"), "address", "110", false);
+        return new Order(orderId, 9, 1, new BigDecimal("1"), "address", "110", false);
     }
 
     @Setter
     private static class CreateOrderRequest {
-        private String productId;
+        private long productId;
         private int quantity;
         private BigDecimal totalPrice;
         private String address;

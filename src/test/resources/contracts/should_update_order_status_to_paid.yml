@@ -4,9 +4,9 @@ request:
   headers:
     Content-Type: application/json
   body:
-    productId: product-id-1
+    productId: 1
     isPayed: true
 response:
   status: 204
   body:
-    productId: product-id-9
+    productId: 9

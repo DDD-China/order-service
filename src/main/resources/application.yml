@@ -3,3 +3,7 @@ server:
 spring:
   redis:
     host: redis
+  datasource:
+    url: jdbc:mysql://localhost/order_service_db
+    username: root
+    password: abcd1234

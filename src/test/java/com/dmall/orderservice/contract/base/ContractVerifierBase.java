@@ -16,9 +16,9 @@ public class ContractVerifierBase {
     @Before
     public void setup() {
         final OrderApplicationService orderApplicationService = mock(OrderApplicationService.class);
-        when(orderApplicationService.createOrder(anyString(), anyInt(), any(BigDecimal.class), anyString(), anyString()))
+        when(orderApplicationService.createOrder(anyLong(), anyInt(), any(BigDecimal.class), anyString(), anyString()))
                 .thenReturn(
-                        new Order("order-id-1", "product-id-1", 10, new BigDecimal("1"), "address", "phoneNumber", false)
+                        new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false)
                 );
         RestAssuredMockMvc.standaloneSetup(new OrderController(orderApplicationService));
     }
