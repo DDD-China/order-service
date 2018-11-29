@@ -6,7 +6,12 @@ request:
 response:
   status: 200
   body:
-    productId: 1
     id: 8888
+    productId: 1
+    quantity: 1
+    totalPrice: 1
+    address: address
+    phoneNumber: 110
+    paid: false
   headers:
     Content-Type: application/json;charset=UTF-8

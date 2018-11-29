@@ -5,8 +5,18 @@ request:
     Content-Type: application/json
   body:
     productId: 1
-    isPayed: true
+    quantity: 10
+    totalPrice: 100
+    address: address
+    phoneNumber: 110
+    paid: true
 response:
   status: 204
   body:
-    productId: 9
+    id: 8888
+    productId: 1
+    quantity: 10
+    totalPrice: 100
+    address: address
+    phoneNumber: 110
+    paid: true

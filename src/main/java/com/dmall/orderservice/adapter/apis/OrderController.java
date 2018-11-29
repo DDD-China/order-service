@@ -40,7 +40,7 @@ public class OrderController {
     @PutMapping("/{orderId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public Order updateOrder(@PathVariable String orderId) {
-        return new Order(orderId, 9, 1, new BigDecimal("1"), "address", "110", false);
+        return new Order(orderId, 1, 10, new BigDecimal("100"), "address", "110", true);
     }
 
     @Setter

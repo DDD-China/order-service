@@ -15,15 +15,23 @@ class OrderEntity {
     @Id
     private String id;
     private long productId;
+    private int quantity;
     private BigDecimal totalPrice;
+    private String address;
+    private String phoneNumber;
+    private boolean paid;
 
     OrderEntity(Order order) {
-        this.id = order.getId();
-        this.productId = order.getProductId();
-        this.totalPrice = order.getTotalPrice();
+        id = order.getId();
+        productId = order.getProductId();
+        quantity = order.getQuantity();
+        totalPrice = order.getTotalPrice();
+        address = order.getAddress();
+        phoneNumber = order.getPhoneNumber();
+        paid = order.isPaid();
     }
 
     Order toOrder() {
-        return new Order(id, productId, 0, totalPrice, "address", "phoneNumber", false);
+        return new Order(id, productId, quantity, totalPrice, address, phoneNumber, paid);
     }
 }

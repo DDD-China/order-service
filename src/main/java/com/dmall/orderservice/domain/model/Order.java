@@ -15,7 +15,7 @@ public class Order {
     private final BigDecimal totalPrice;
     private final String address;
     private final String phoneNumber;
-    private boolean isPaid;
+    private final boolean paid;
 
     public Order(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
         id = UUID.randomUUID().toString();
@@ -24,5 +24,6 @@ public class Order {
         this.totalPrice = totalPrice;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        paid = false;
     }
 }
