@@ -1,7 +1,7 @@
 package com.dmall.orderservice.adapter.mysql;
 
-import com.dmall.orderservice.domain.model.Order;
-import com.dmall.orderservice.domain.model.OrderRepository;
+import com.dmall.orderservice.domain.model.order.Order;
+import com.dmall.orderservice.domain.model.order.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

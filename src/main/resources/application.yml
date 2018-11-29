@@ -11,9 +11,15 @@ management:
   endpoints:
     web:
       base-path: /orders/actuator
+dmall:
+  inventory:
+    url: http://localhost:6565
 ---
 spring:
   profiles: prod
   datasource:
     url: jdbc:mysql://dmall-order-db.cti1pnc10c3g.rds.cn-north-1.amazonaws.com.cn/order_service_db
     username: admin
+dmall:
+  inventory:
+    url: http://inventory-service:9080

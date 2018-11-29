@@ -1,4 +1,4 @@
-package com.dmall.orderservice.domain.model;
+package com.dmall.orderservice.domain.model.order;
 
 import java.util.Optional;
 

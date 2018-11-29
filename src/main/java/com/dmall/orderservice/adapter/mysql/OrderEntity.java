@@ -1,6 +1,6 @@
 package com.dmall.orderservice.adapter.mysql;
 
-import com.dmall.orderservice.domain.model.Order;
+import com.dmall.orderservice.domain.model.order.Order;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

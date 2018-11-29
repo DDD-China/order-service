@@ -2,7 +2,7 @@ package com.dmall.orderservice.adapter.apis;
 
 
 import com.dmall.orderservice.application.OrderApplicationService;
-import com.dmall.orderservice.domain.model.Order;
+import com.dmall.orderservice.domain.model.order.Order;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

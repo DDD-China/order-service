@@ -2,7 +2,7 @@ package com.dmall.orderservice.contract.base;
 
 import com.dmall.orderservice.adapter.apis.OrderController;
 import com.dmall.orderservice.application.OrderApplicationService;
-import com.dmall.orderservice.domain.model.Order;
+import com.dmall.orderservice.domain.model.order.Order;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.Before;
 
