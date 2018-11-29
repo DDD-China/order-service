@@ -25,7 +25,7 @@ public class OrderApplicationService {
     public Order createOrder(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
         final String lockId = inventoryLockRepository.save(new InventoryLock(productId, quantity));
 
-        final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber);
+        final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber, lockId);
         orderRepository.save(order);
         return order;
     }

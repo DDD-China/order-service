@@ -1,0 +1,2 @@
+ALTER TABLE orders
+  ADD lock_id VARCHAR(50) NOT NULL;
