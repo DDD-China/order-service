@@ -5,6 +5,8 @@ import com.dmall.orderservice.domain.model.inventorylock.InventoryLock;
 import com.dmall.orderservice.domain.model.inventorylock.InventoryLockService;
 import com.dmall.orderservice.domain.model.order.Order;
 import com.dmall.orderservice.domain.model.order.OrderRepository;
+import com.dmall.orderservice.domain.model.shipping.Shipping;
+import com.dmall.orderservice.domain.model.shipping.ShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +17,22 @@ import java.util.Optional;
 public class OrderApplicationService {
     private final OrderRepository orderRepository;
     private final InventoryLockService inventoryLockService;
+    private final ShippingService shippingService;
 
     @Autowired
-    public OrderApplicationService(OrderRepository orderRepository, InventoryLockService inventoryLockService) {
+    public OrderApplicationService(OrderRepository orderRepository, InventoryLockService inventoryLockService, ShippingService shippingService) {
         this.orderRepository = orderRepository;
         this.inventoryLockService = inventoryLockService;
+        this.shippingService = shippingService;
     }
 
     public Order createOrder(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
         final String lockId = inventoryLockService.createLock(new InventoryLock(productId, quantity));
 
         final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber, lockId);
+
+        shippingService.createShipping(new Shipping(8888, quantity, address));
+
         orderRepository.save(order);
         return order;
     }
