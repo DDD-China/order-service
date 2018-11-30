@@ -28,6 +28,12 @@ public class OrderController {
         return orderApplicationService.createOrder(request.productId, request.quantity, request.totalPrice, request.address, request.phoneNumber);
     }
 
+    @GetMapping("/{orderId}")
+    public Order getOrder(@PathVariable String orderId) {
+        return new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true, "qixi");
+    }
+
+
     @Setter
     private static class CreateOrderRequest {
         @NotNull
