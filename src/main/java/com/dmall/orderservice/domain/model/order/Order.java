@@ -25,4 +25,8 @@ public class Order {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
+    public void paid() {
+        paid=true;
+    }
 }

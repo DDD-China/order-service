@@ -33,7 +33,11 @@ public class OrderController {
 //        return new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true, "qixi");
         return orderApplicationService.getOrder(orderId);
     }
-
+  
+    @PutMapping("/{orderId}")
+    public void updateOrder(@PathVariable String orderId,UpdateOrderRequest updateOrderRequest){
+        orderApplicationService.paidOrder(orderId);
+    }
 
     @Setter
     private static class CreateOrderRequest {
@@ -47,5 +51,10 @@ public class OrderController {
         private String address;
         @NotNull
         private String phoneNumber;
+    }
+
+    @Setter
+    private static class UpdateOrderRequest {
+        Boolean paid;
     }
 }

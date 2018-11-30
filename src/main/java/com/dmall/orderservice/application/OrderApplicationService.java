@@ -37,6 +37,11 @@ public class OrderApplicationService {
         @RequestMapping(method = RequestMethod.POST, value = "/inventories/lock")
         String lock(Lock lock);
     }
+     public void paidOrder(String orderId){
+         final Order order = orderRepository.getOrder(orderId);
+         order.paid();
+         orderRepository.save(order);
+     }
 
     @Getter
     @AllArgsConstructor
