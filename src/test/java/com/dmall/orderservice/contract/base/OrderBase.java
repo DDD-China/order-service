@@ -18,7 +18,7 @@ public class OrderBase {
         final OrderApplicationService orderApplicationService = mock(OrderApplicationService.class);
         when(orderApplicationService.createOrder(anyLong(), anyInt(), any(BigDecimal.class), anyString(), anyString()))
                 .thenReturn(
-                        new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false)
+                        new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false, "qixi")
                 );
         RestAssuredMockMvc.standaloneSetup(new OrderController(orderApplicationService));
     }
