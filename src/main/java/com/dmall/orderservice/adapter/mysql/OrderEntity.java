@@ -20,6 +20,7 @@ class OrderEntity {
     private String address;
     private String phoneNumber;
     private boolean paid;
+    private String lockId;
 
     OrderEntity(Order order) {
         id = order.getId();
@@ -29,5 +30,6 @@ class OrderEntity {
         address = order.getAddress();
         phoneNumber = order.getPhoneNumber();
         paid = order.isPaid();
+        lockId = order.getLockId();
     }
 }

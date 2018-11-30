@@ -16,14 +16,16 @@ public class Order {
     private final String address;
     private final String phoneNumber;
     private boolean paid;
+    private String lockId;
 
-    public Order(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
+    public Order(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber, String lockId) {
         id = UUID.randomUUID().toString();
         this.productId = productId;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.lockId = lockId;
     }
 
     public void paid() {

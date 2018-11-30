@@ -7,6 +7,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -27,9 +28,9 @@ public class OrderApplicationService {
 
     public Order createOrder(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
 //lock inventory
-        inventoryClient.lock(new Lock(quantity,productId));
+        String lockId = inventoryClient.lock(new Lock(quantity,productId));
 
-        final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber);
+        final Order order = new Order(productId, quantity, totalPrice, address, phoneNumber,lockId);
         orderRepository.save(order);
         return order;
     }
@@ -38,11 +39,15 @@ public class OrderApplicationService {
     public interface InventoryClient {
         @RequestMapping(method = RequestMethod.POST, value = "/inventories/lock")
         String lock(Lock lock);
+
+        @RequestMapping(method = RequestMethod.PUT, value = "/inventories/lock/{lockId}")
+        void unlock(@PathVariable String lockId);
     }
      public void paidOrder(String orderId){
          final Order order = orderRepository.getOrder(orderId);
          order.paid();
          shippingClient.shipping(new Shipping(order.getId(),order.getQuantity(),order.getAddress()));
+         inventoryClient.unlock(order.getLockId());
          orderRepository.save(order);
      }
 
@@ -70,5 +75,6 @@ public class OrderApplicationService {
         int quantity;
         String address;
     }
+    
     
 }
