@@ -30,8 +30,9 @@ public class OrderServiceApplication {
         @Override
         protected void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("/orders/actuator/info").permitAll()
-                    .anyRequest().authenticated().and()
+//                    .antMatchers("/orders/actuator/info").permitAll()
+                    .antMatchers("/orders").authenticated()
+                    .anyRequest().permitAll().and()
                     .csrf().disable();
         }
     }
