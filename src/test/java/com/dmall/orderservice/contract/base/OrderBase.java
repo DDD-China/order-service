@@ -18,10 +18,10 @@ public class OrderBase {
         final OrderApplicationService orderApplicationService = mock(OrderApplicationService.class);
         when(orderApplicationService.createOrder(anyLong(), anyInt(), any(BigDecimal.class), anyString(), anyString()))
                 .thenReturn(
-                        new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false)
+                        new Order("order-id-1", 1, 10, new BigDecimal("1"), "address", "phoneNumber", false, "1")
                 );
         when(orderApplicationService.getOrder(anyString())).thenReturn(
-                        new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true)
+                        new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true, "1")
         );
         RestAssuredMockMvc.standaloneSetup(new OrderController(orderApplicationService));
     }
