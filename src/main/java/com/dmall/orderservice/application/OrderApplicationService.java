@@ -21,4 +21,8 @@ public class OrderApplicationService {
         orderRepository.save(order);
         return order;
     }
+
+    public Order getOrder(String orderId) {
+        return orderRepository.getOrder(orderId);
+    }
 }

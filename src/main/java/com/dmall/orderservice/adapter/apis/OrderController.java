@@ -30,7 +30,8 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public Order getOrder(@PathVariable String orderId) {
-        return new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true, "qixi");
+//        return new Order("1", 1, 10, new BigDecimal(100), "address001", "110", true, "qixi");
+        return orderApplicationService.getOrder(orderId);
     }
 
 

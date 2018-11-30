@@ -19,4 +19,15 @@ public class MysqlOrderRepository implements OrderRepository {
         orderPersistence.save(orderEntity);
         return order;
     }
+
+    @Override
+    public Order getOrder(String orderId) {
+        return orderPersistence
+                .findById(orderId)
+                .map(entity -> new Order(entity.getId(), entity.getProductId(),
+                        entity.getQuantity(), entity.getTotalPrice(), entity.getAddress(),
+                        entity.getPhoneNumber(), entity.isPaid()))
+                .orElse(null);
+
+    }
 }

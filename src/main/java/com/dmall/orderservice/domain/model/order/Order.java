@@ -16,7 +16,6 @@ public class Order {
     private final String address;
     private final String phoneNumber;
     private boolean paid;
-    private String name = "qixi";
 
     public Order(long productId, int quantity, BigDecimal totalPrice, String address, String phoneNumber) {
         id = UUID.randomUUID().toString();
